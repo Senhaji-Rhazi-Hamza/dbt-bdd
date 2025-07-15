@@ -1,0 +1,24 @@
+name: dbt_bdd
+version: '1.0'
+config-version: 2
+
+profile: default
+
+model-paths: ["models"]
+analysis-paths: ["analysis"]
+
+vars:
+  input_file: "data/input_customer_data.csv"
+  expected_file : "data/expected_normalized_customers.csv"
+
+
+models:
+  dbt_bdd:
+    inputs:
+      +tags: ["source"]
+    transforms:
+      +tags: ["transform"]
+      +materialized: table
+    tests:
+      +tags: ["test"]
+      +materialized: table
